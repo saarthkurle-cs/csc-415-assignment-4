@@ -712,7 +712,7 @@ void processcommand (char * cmd)
 	}
 
 /****************************************************
-*  Help commmand
+*  Directory Management
 ****************************************************/
 
 // Directory management functions
