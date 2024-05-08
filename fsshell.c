@@ -722,12 +722,13 @@ DE* opendirectory(char* path) {
         printf("Error: Could not parse the path or directory does not exist.\n");
         return NULL;
     }
-    if (!DEisDirectory(info.parent[info.lastElementIndex])) {
-        printf("Error: Not a directory.\n");
+    if (info.lastElementIndex == -1 || !DEisDirectory(info.parent + info.lastElementIndex)) {
+        printf("Error: Not a directory or index out of bounds.\n");
         return NULL;
     }
-    return &(info.parent[info.lastElementIndex]);
+    return info.parent + info.lastElementIndex; 
 }
+
 
 DE* readdirectory(DE* dir) {
     static int current_index = 0;

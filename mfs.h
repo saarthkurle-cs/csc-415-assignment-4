@@ -39,19 +39,8 @@ typedef u_int64_t uint64_t;
 typedef u_int32_t uint32_t;
 #endif
 
-//global directory variables
-extern DE* loadedCWD;
-extern DE* root;
-extern char* loadedCWDString;
 
 enum FileType { DIRECTORY_TYPE, FILE_TYPE }; //Values for entry -> enum fileType
-
-//struct for parsePath information
-struct ppReturn {
-	char* lastElementName;
-	int lastElementIndex;
-	DE * parent;
-};
 
 struct VCB{
    char name[81]; 	//Name for our Volume Control Block
@@ -98,6 +87,18 @@ typedef struct DE {
    enum FileType fileType; 	// indicates file type being used
 } DE;
 
+//struct for parsePath information
+struct ppReturn {
+	char* lastElementName;
+	int lastElementIndex;
+	DE * parent;
+};
+
+//global directory variables
+extern DE* loadedCWD;
+extern DE* root;
+extern char* loadedCWDString;
+
 // Key directory functions
 int fs_mkdir(const char *pathname, mode_t mode);
 int fs_rmdir(const char *pathname);
@@ -123,6 +124,8 @@ void setDotDotEntry(struct DE *entry);		// helper for setting ".." entry
 int initDirectoryEntry(struct DE *entry);   //initializes a directory entry struct
 
 int parsePath(char* path, struct ppReturn* info);
+
+
 
 
 // This is the strucutre that is filled in from a call to fs_stat
